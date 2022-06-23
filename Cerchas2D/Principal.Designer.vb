@@ -32,9 +32,13 @@ Partial Class Principal
         Me.btnFuerzas = New FontAwesome.Sharp.IconButton()
         Me.btnResultados = New FontAwesome.Sharp.IconButton()
         Me.PanelTitleBar = New System.Windows.Forms.Panel()
+        Me.IconCurrentForm = New FontAwesome.Sharp.IconPictureBox()
+        Me.lblFormTitle = New System.Windows.Forms.Label()
         Me.PanelMenu.SuspendLayout()
         Me.PanelLogo.SuspendLayout()
         CType(Me.PicBoxLogo, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelTitleBar.SuspendLayout()
+        CType(Me.IconCurrentForm, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelMenu
@@ -183,11 +187,38 @@ Partial Class Principal
         '
         'PanelTitleBar
         '
+        Me.PanelTitleBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(101, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(118, Byte), Integer))
+        Me.PanelTitleBar.Controls.Add(Me.lblFormTitle)
+        Me.PanelTitleBar.Controls.Add(Me.IconCurrentForm)
         Me.PanelTitleBar.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelTitleBar.Location = New System.Drawing.Point(220, 0)
         Me.PanelTitleBar.Name = "PanelTitleBar"
         Me.PanelTitleBar.Size = New System.Drawing.Size(585, 75)
         Me.PanelTitleBar.TabIndex = 1
+        '
+        'IconCurrentForm
+        '
+        Me.IconCurrentForm.BackColor = System.Drawing.Color.FromArgb(CType(CType(101, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(118, Byte), Integer))
+        Me.IconCurrentForm.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(159, Byte), Integer))
+        Me.IconCurrentForm.IconChar = FontAwesome.Sharp.IconChar.Home
+        Me.IconCurrentForm.IconColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(159, Byte), Integer))
+        Me.IconCurrentForm.IconFont = FontAwesome.Sharp.IconFont.[Auto]
+        Me.IconCurrentForm.Location = New System.Drawing.Point(19, 22)
+        Me.IconCurrentForm.Name = "IconCurrentForm"
+        Me.IconCurrentForm.Size = New System.Drawing.Size(32, 32)
+        Me.IconCurrentForm.TabIndex = 0
+        Me.IconCurrentForm.TabStop = False
+        '
+        'lblFormTitle
+        '
+        Me.lblFormTitle.AutoSize = True
+        Me.lblFormTitle.Font = New System.Drawing.Font("Helvetica", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFormTitle.ForeColor = System.Drawing.Color.White
+        Me.lblFormTitle.Location = New System.Drawing.Point(55, 30)
+        Me.lblFormTitle.Name = "lblFormTitle"
+        Me.lblFormTitle.Size = New System.Drawing.Size(49, 16)
+        Me.lblFormTitle.TabIndex = 1
+        Me.lblFormTitle.Text = "Home"
         '
         'Principal
         '
@@ -202,6 +233,9 @@ Partial Class Principal
         Me.PanelMenu.ResumeLayout(False)
         Me.PanelLogo.ResumeLayout(False)
         CType(Me.PicBoxLogo, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelTitleBar.ResumeLayout(False)
+        Me.PanelTitleBar.PerformLayout()
+        CType(Me.IconCurrentForm, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -215,4 +249,6 @@ Partial Class Principal
     Friend WithEvents PanelLogo As Panel
     Friend WithEvents PicBoxLogo As PictureBox
     Friend WithEvents PanelTitleBar As Panel
+    Friend WithEvents lblFormTitle As Label
+    Friend WithEvents IconCurrentForm As FontAwesome.Sharp.IconPictureBox
 End Class
