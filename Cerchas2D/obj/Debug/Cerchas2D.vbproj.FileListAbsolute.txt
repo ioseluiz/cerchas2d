@@ -1,0 +1,14 @@
+C:\Users\Jose Luis\source\repos\Cerchas2D\Cerchas2D\bin\Debug\Cerchas2D.exe.config
+C:\Users\Jose Luis\source\repos\Cerchas2D\Cerchas2D\bin\Debug\Cerchas2D.exe
+C:\Users\Jose Luis\source\repos\Cerchas2D\Cerchas2D\bin\Debug\Cerchas2D.pdb
+C:\Users\Jose Luis\source\repos\Cerchas2D\Cerchas2D\bin\Debug\Cerchas2D.xml
+C:\Users\Jose Luis\source\repos\Cerchas2D\Cerchas2D\bin\Debug\FontAwesome.Sharp.dll
+C:\Users\Jose Luis\source\repos\Cerchas2D\Cerchas2D\obj\Debug\Cerchas2D.vbprojAssemblyReference.cache
+C:\Users\Jose Luis\source\repos\Cerchas2D\Cerchas2D\obj\Debug\Cerchas2D.Principal.resources
+C:\Users\Jose Luis\source\repos\Cerchas2D\Cerchas2D\obj\Debug\Cerchas2D.Resources.resources
+C:\Users\Jose Luis\source\repos\Cerchas2D\Cerchas2D\obj\Debug\Cerchas2D.vbproj.GenerateResource.cache
+C:\Users\Jose Luis\source\repos\Cerchas2D\Cerchas2D\obj\Debug\Cerchas2D.vbproj.CoreCompileInputs.cache
+C:\Users\Jose Luis\source\repos\Cerchas2D\Cerchas2D\obj\Debug\Cerchas2D.vbproj.CopyComplete
+C:\Users\Jose Luis\source\repos\Cerchas2D\Cerchas2D\obj\Debug\Cerchas2D.exe
+C:\Users\Jose Luis\source\repos\Cerchas2D\Cerchas2D\obj\Debug\Cerchas2D.xml
+C:\Users\Jose Luis\source\repos\Cerchas2D\Cerchas2D\obj\Debug\Cerchas2D.pdb
