@@ -1,7 +1,7 @@
 ﻿Public Class Elemento
     Public id As Integer, Ni As Nodo, Nj As Nodo, ar As Double, modE As Double
     Dim longitud As Double, coseno As Double, seno As Double
-    Dim KL(4, 4) As Double, T(4, 4) As Double
+    Public KL(4, 4) As Double, T(4, 4) As Double, TT(4, 4) As Double, KG(4, 4) As Double
 
 
     Public Sub New(ByVal elem_id As Integer, ByVal nodoInicial As Nodo, ByVal nodoFinal As Nodo, area As Double, moduElast As Double)
@@ -17,6 +17,8 @@
         calcular_seno()
         ConstruirMatrizRigidezLocal()
         ConstruirMatrizTransformacion()
+        ConstruirMatrizTransformacionTranspuesta()
+        KG = MMultMatrices(MMultMatrices(TT, KL), T)
 
 
     End Sub
@@ -68,6 +70,46 @@
         T(4, 4) = Me.coseno
     End Sub
 
+    Public Sub ConstruirMatrizTransformacionTranspuesta()
+        For i = 1 To 4
+            For j = 1 To 4
+                TT(i, j) = 0
+            Next
+        Next
+        'Fila 1
+        TT(1, 1) = Me.coseno
+        TT(1, 2) = -Me.seno
+        'Fila 2
+        TT(2, 1) = Me.seno
+        TT(2, 2) = Me.coseno
+        'Fila 3
+        TT(3, 3) = Me.coseno
+        TT(3, 4) = -Me.seno
+        'Fila 4
+        TT(4, 3) = Me.seno
+        TT(4, 4) = Me.coseno
+
+    End Sub
+
+    Public Sub ConstruirMatrizRigidezGlobal()
+
+    End Sub
+
+    Public Function MMultMatrices(M1(,) As Double, M2(,) As Double) As Double(,)
+        Dim Resultado As Double(,)
+        ReDim Resultado(M1.GetLength(0) - 1, M2.GetLength(1) - 1)
+        For h = 1 To M1.GetLength(0) - 1
+            For j = 1 To M2.GetLength(0) - 1
+                For k = 1 To M2.GetLength(1) - 1
+                    Resultado(h, j) += M1(h, k) * M2(k, j)
+                Next
+
+            Next
+        Next
+
+        Return Resultado
+
+    End Function
 
 
 

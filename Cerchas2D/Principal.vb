@@ -146,6 +146,11 @@ Public Class Principal
 
         Next
 
+        'Crear estructura de cercha compuesta de objetos de elementos
+        Dim estructura As Cercha = New Cercha(vnodo, velemento)
+        Console.WriteLine(Str(estructura.cantElementos))
+
+
         'Crear dibujo de la cercha
         Dim W As Double, H As Double, maxCoordenada As Double
         Dim xInicial As Double, yInicial As Double

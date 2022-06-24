@@ -33,6 +33,8 @@ Partial Class FormElementos
         '
         'dgvElementos
         '
+        Me.dgvElementos.AllowUserToAddRows = False
+        Me.dgvElementos.AllowUserToDeleteRows = False
         Me.dgvElementos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvElementos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Elemento, Me.Inicio, Me.Fin, Me.modE, Me.Area})
         Me.dgvElementos.Location = New System.Drawing.Point(65, 80)
