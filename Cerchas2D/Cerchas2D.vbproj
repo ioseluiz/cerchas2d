@@ -80,6 +80,38 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Elemento.vb" />
+    <Compile Include="Classes\Nodo.vb" />
+    <Compile Include="Forms\FormDatos.Designer.vb">
+      <DependentUpon>FormDatos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormDatos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormElementos.Designer.vb">
+      <DependentUpon>FormElementos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormElementos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormFuerzas.Designer.vb">
+      <DependentUpon>FormFuerzas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormFuerzas.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormNodos.Designer.vb">
+      <DependentUpon>FormNodos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormNodos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormResultados.Designer.vb">
+      <DependentUpon>FormResultados.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormResultados.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Principal.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +136,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\FormDatos.resx">
+      <DependentUpon>FormDatos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormElementos.resx">
+      <DependentUpon>FormElementos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormNodos.resx">
+      <DependentUpon>FormNodos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormResultados.resx">
+      <DependentUpon>FormResultados.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Principal.resx">
       <DependentUpon>Principal.vb</DependentUpon>
     </EmbeddedResource>
