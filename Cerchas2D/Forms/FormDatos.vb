@@ -18,6 +18,12 @@
             FormElementos.dgvElementos.Rows(i - 1).Cells(0).Value = i
         Next
 
+        FormFuerzas.dgvCargas.RowCount = nudNodos.Value
+        For i = 1 To nudNodos.Value
+            FormFuerzas.dgvCargas.Rows(i - 1).Cells(0).Value = i
+        Next
+
+
 
 
 

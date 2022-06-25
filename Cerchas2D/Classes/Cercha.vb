@@ -1,16 +1,21 @@
 ﻿Public Class Cercha
-    Public cantElementos As Integer, arrayElementos() As Elemento, cantNodos As Integer, arrayNodos() As Nodo
-    Public K(,) As Double
+    Public cantElementos As Integer, arrayElementos() As Elemento, cantNodos As Integer, arrayNodos() As Nodo, arrayCargas() As Carga, arrayRestricciones() As Restriccion
+    Public K(,) As Double, P() As Double, D() As Object, F() As Object
 
-    Public Sub New(vectorNodos() As Nodo, vectorElementos() As Elemento)
+    Public Sub New(vectorNodos() As Nodo, vectorElementos() As Elemento, vectorCargas() As Carga, vectorRestricciones() As Restriccion)
         'Constructor de la clase
         cantNodos = vectorNodos.Length - 1
         cantElementos = vectorElementos.Length - 1
-        ReDim arrayElementos(cantElementos), arrayNodos(cantNodos)
+        ReDim arrayElementos(cantElementos), arrayNodos(cantNodos), arrayCargas(cantNodos), arrayRestricciones(2 * cantNodos)
         arrayElementos = vectorElementos
         arrayNodos = vectorNodos
-        ReDim K(2 * cantNodos, 2 * cantNodos)
-        ConstruirMatrizRigidezGlobal()
+        arrayCargas = vectorCargas
+        arrayRestricciones = vectorRestricciones
+        ReDim K(2 * cantNodos, 2 * cantNodos), P(2 * cantNodos), D(2 * cantNodos), F(2 * cantNodos)
+        ConstruirMatrizRigidezGlobal() '{K}
+        ConstruirVectorCargas() '{P}
+        ConstruirVectorDesplazamientos() '{D} y {F}
+
 
 
     End Sub
@@ -45,6 +50,45 @@
             K(2 * nodoFinal, 2 * nodoFinal) += kg(4, 4)
         Next
     End Sub
+
+    Public Sub ConstruirVectorCargas()
+        Dim idJoint As Integer
+        Dim Px As Double, Py As Double
+        For i = 1 To cantNodos
+            idJoint = arrayCargas(i).id_nodo
+            Px = arrayCargas(i).Px
+            Py = arrayCargas(i).Py
+            P(2 * idJoint - 1) = Px
+            P(2 * idJoint) = Py
+        Next
+
+    End Sub
+
+    Public Sub ConstruirVectorDesplazamientos()
+        For i = 1 To 2 * cantNodos
+            If arrayRestricciones(i).tipoRestriccion = True Then
+                D(i) = 0
+                If (-1) ^ i < 0 Then
+                    F(i) = "Rx" + Str(arrayRestricciones(i).idNodo)
+                Else
+                    F(i) = "Ry" + Str(arrayRestricciones(i).idNodo)
+                End If
+            Else
+                'No hay Restriccion en el grado de libertad
+                F(i) = 0
+                If (-1) ^ i < 0 Then
+                    'Grado de Libertad en X
+                    D(i) = "U" + Str(arrayRestricciones(i).idNodo)
+                Else
+                    'Grado de Libertad en Y
+                    D(i) = "V" + Str(arrayRestricciones(i).idNodo)
+                End If
+
+            End If
+        Next
+    End Sub
+
+
 
 
 End Class

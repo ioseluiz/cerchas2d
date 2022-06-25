@@ -13,7 +13,7 @@ Public Class Principal
 
     Dim nodoId As Integer, _x As Double, _y As Double
     Dim elementoId As Integer, nodoInicio As Integer, nodoFinal As Integer, areaElem As Double, modElem As Double
-    Dim vnodo() As Nodo, velemento() As Elemento
+    Dim vnodo() As Nodo, velemento() As Elemento, vcarga() As Carga, vrestriccion() As Restriccion
 
     'Constructor
     Public Sub New()
@@ -125,12 +125,22 @@ Public Class Principal
         elementos = FormDatos.nudElementos.Value
 
         'Lectura de Datos Nodos
-        ReDim vnodo(nodos)
+        ReDim vnodo(nodos), vrestriccion(2 * nodos)
         For i = 1 To nodos
             nodoId = FormNodos.dgvJoints.Rows(i - 1).Cells(0).Value
             _x = FormNodos.dgvJoints.Rows(i - 1).Cells(1).Value
             _y = FormNodos.dgvJoints.Rows(i - 1).Cells(2).Value
             vnodo(i) = New Nodo(nodoId, _x, _y)
+            If FormNodos.dgvJoints.Rows(i - 1).Cells(3).Value = True Then
+                vrestriccion(2 * i - 1) = New Restriccion(2 * i - 1, nodoId, True)
+            Else
+                vrestriccion(2 * i - 1) = New Restriccion(2 * i - 1, nodoId, False)
+            End If
+            If FormNodos.dgvJoints.Rows(i - 1).Cells(4).Value = True Then
+                vrestriccion(2 * i) = New Restriccion(2 * i, nodoId, True)
+            Else
+                vrestriccion(2 * i) = New Restriccion(2 * i, nodoId, False)
+            End If
         Next
 
         'Lectura de Datos de Elementos
@@ -146,9 +156,27 @@ Public Class Principal
 
         Next
 
+
+        'Lectura de Datos de Cargas
+        ReDim vcarga(nodos)
+        Dim CargaX As Double, CargaY As Double
+        For i = 1 To nodos
+            nodoId = FormFuerzas.dgvCargas.Rows(i - 1).Cells(0).Value
+            CargaX = FormFuerzas.dgvCargas.Rows(i - 1).Cells(1).Value
+            CargaY = FormFuerzas.dgvCargas.Rows(i - 1).Cells(2).Value
+            vcarga(i) = New Carga(nodoId, CargaX, CargaY)
+        Next
+
+        'Lectura de Restricciones en Grados de Libertad (Apoyos)
+
+
+
         'Crear estructura de cercha compuesta de objetos de elementos
-        Dim estructura As Cercha = New Cercha(vnodo, velemento)
-        Console.WriteLine(Str(estructura.cantElementos))
+        Dim estructura As Cercha = New Cercha(vnodo, velemento, vcarga, vrestriccion)
+
+        'Solucion del sistema de ecuaciones
+
+
 
 
         'Crear dibujo de la cercha

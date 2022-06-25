@@ -80,9 +80,11 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Carga.vb" />
     <Compile Include="Classes\Cercha.vb" />
     <Compile Include="Classes\Elemento.vb" />
     <Compile Include="Classes\Nodo.vb" />
+    <Compile Include="Classes\Restriccion.vb" />
     <Compile Include="Forms\FormDatos.Designer.vb">
       <DependentUpon>FormDatos.vb</DependentUpon>
     </Compile>
@@ -142,6 +144,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormElementos.resx">
       <DependentUpon>FormElementos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormFuerzas.resx">
+      <DependentUpon>FormFuerzas.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormNodos.resx">
       <DependentUpon>FormNodos.vb</DependentUpon>
