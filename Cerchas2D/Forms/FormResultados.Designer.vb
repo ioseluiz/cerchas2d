@@ -23,24 +23,48 @@ Partial Class FormResultados
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.picBoxDiagram = New System.Windows.Forms.PictureBox()
+        Me.lstDesplazamientos = New System.Windows.Forms.ListBox()
+        Me.lstReacciones = New System.Windows.Forms.ListBox()
         CType(Me.picBoxDiagram, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'picBoxDiagram
         '
         Me.picBoxDiagram.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.picBoxDiagram.Location = New System.Drawing.Point(12, 30)
+        Me.picBoxDiagram.Location = New System.Drawing.Point(16, 37)
+        Me.picBoxDiagram.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.picBoxDiagram.Name = "picBoxDiagram"
-        Me.picBoxDiagram.Size = New System.Drawing.Size(360, 360)
+        Me.picBoxDiagram.Size = New System.Drawing.Size(480, 443)
         Me.picBoxDiagram.TabIndex = 0
         Me.picBoxDiagram.TabStop = False
         '
+        'lstDesplazamientos
+        '
+        Me.lstDesplazamientos.FormattingEnabled = True
+        Me.lstDesplazamientos.ItemHeight = 16
+        Me.lstDesplazamientos.Location = New System.Drawing.Point(541, 46)
+        Me.lstDesplazamientos.Name = "lstDesplazamientos"
+        Me.lstDesplazamientos.Size = New System.Drawing.Size(387, 180)
+        Me.lstDesplazamientos.TabIndex = 1
+        '
+        'lstReacciones
+        '
+        Me.lstReacciones.FormattingEnabled = True
+        Me.lstReacciones.ItemHeight = 16
+        Me.lstReacciones.Location = New System.Drawing.Point(541, 254)
+        Me.lstReacciones.Name = "lstReacciones"
+        Me.lstReacciones.Size = New System.Drawing.Size(387, 212)
+        Me.lstReacciones.TabIndex = 2
+        '
         'FormResultados
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(1067, 554)
+        Me.Controls.Add(Me.lstReacciones)
+        Me.Controls.Add(Me.lstDesplazamientos)
         Me.Controls.Add(Me.picBoxDiagram)
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "FormResultados"
         Me.Text = "Resultados"
         CType(Me.picBoxDiagram, System.ComponentModel.ISupportInitialize).EndInit()
@@ -49,4 +73,6 @@ Partial Class FormResultados
     End Sub
 
     Friend WithEvents picBoxDiagram As PictureBox
+    Friend WithEvents lstDesplazamientos As ListBox
+    Friend WithEvents lstReacciones As ListBox
 End Class

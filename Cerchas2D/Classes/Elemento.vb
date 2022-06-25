@@ -19,6 +19,14 @@
         ConstruirMatrizTransformacion()
         ConstruirMatrizTransformacionTranspuesta()
         KG = MMultMatrices(MMultMatrices(TT, KL), T)
+        'Imprimir KG
+        Console.WriteLine("Elemento " + Str(id))
+        For i = 1 To 4
+            Console.WriteLine("FILA " + Str(i))
+            For j = 1 To 4
+                Console.WriteLine(Str(KG(i, j)))
+            Next
+        Next
 
 
     End Sub
@@ -44,8 +52,8 @@
         KL(1, 1) = modE * ar / longitud
         KL(1, 3) = -modE * ar / longitud
         'Fila 3
-        KL(1, 1) = -modE * ar / longitud
-        KL(1, 3) = modE * ar / longitud
+        KL(3, 1) = -modE * ar / longitud
+        KL(3, 3) = modE * ar / longitud
 
     End Sub
 
