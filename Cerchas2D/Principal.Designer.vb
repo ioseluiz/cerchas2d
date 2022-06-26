@@ -36,11 +36,15 @@ Partial Class Principal
         Me.lblFormTitle = New System.Windows.Forms.Label()
         Me.IconCurrentForm = New FontAwesome.Sharp.IconPictureBox()
         Me.PanelDesktop = New System.Windows.Forms.Panel()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.optEs = New System.Windows.Forms.RadioButton()
+        Me.optSI = New System.Windows.Forms.RadioButton()
         Me.PanelMenu.SuspendLayout()
         Me.PanelLogo.SuspendLayout()
         CType(Me.PicBoxLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelTitleBar.SuspendLayout()
         CType(Me.IconCurrentForm, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'PanelMenu
@@ -198,6 +202,7 @@ Partial Class Principal
         'PanelTitleBar
         '
         Me.PanelTitleBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(101, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(118, Byte), Integer))
+        Me.PanelTitleBar.Controls.Add(Me.GroupBox1)
         Me.PanelTitleBar.Controls.Add(Me.btnCalcular)
         Me.PanelTitleBar.Controls.Add(Me.lblFormTitle)
         Me.PanelTitleBar.Controls.Add(Me.IconCurrentForm)
@@ -219,7 +224,7 @@ Partial Class Principal
         Me.btnCalcular.IconFont = FontAwesome.Sharp.IconFont.[Auto]
         Me.btnCalcular.IconSize = 32
         Me.btnCalcular.Location = New System.Drawing.Point(623, 12)
-        Me.btnCalcular.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnCalcular.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCalcular.Name = "btnCalcular"
         Me.btnCalcular.Size = New System.Drawing.Size(177, 55)
         Me.btnCalcular.TabIndex = 2
@@ -258,10 +263,46 @@ Partial Class Principal
         Me.PanelDesktop.BackColor = System.Drawing.Color.White
         Me.PanelDesktop.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelDesktop.Location = New System.Drawing.Point(220, 75)
-        Me.PanelDesktop.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelDesktop.Margin = New System.Windows.Forms.Padding(4)
         Me.PanelDesktop.Name = "PanelDesktop"
         Me.PanelDesktop.Size = New System.Drawing.Size(888, 555)
         Me.PanelDesktop.TabIndex = 2
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.optSI)
+        Me.GroupBox1.Controls.Add(Me.optEs)
+        Me.GroupBox1.ForeColor = System.Drawing.Color.White
+        Me.GroupBox1.Location = New System.Drawing.Point(446, 12)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(145, 55)
+        Me.GroupBox1.TabIndex = 3
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Unidades"
+        '
+        'optEs
+        '
+        Me.optEs.AutoSize = True
+        Me.optEs.ForeColor = System.Drawing.Color.White
+        Me.optEs.Location = New System.Drawing.Point(22, 22)
+        Me.optEs.Name = "optEs"
+        Me.optEs.Size = New System.Drawing.Size(47, 21)
+        Me.optEs.TabIndex = 0
+        Me.optEs.TabStop = True
+        Me.optEs.Text = "ES"
+        Me.optEs.UseVisualStyleBackColor = True
+        '
+        'optSI
+        '
+        Me.optSI.AutoSize = True
+        Me.optSI.ForeColor = System.Drawing.Color.White
+        Me.optSI.Location = New System.Drawing.Point(82, 24)
+        Me.optSI.Name = "optSI"
+        Me.optSI.Size = New System.Drawing.Size(41, 21)
+        Me.optSI.TabIndex = 1
+        Me.optSI.TabStop = True
+        Me.optSI.Text = "SI"
+        Me.optSI.UseVisualStyleBackColor = True
         '
         'Principal
         '
@@ -281,6 +322,8 @@ Partial Class Principal
         Me.PanelTitleBar.ResumeLayout(False)
         Me.PanelTitleBar.PerformLayout()
         CType(Me.IconCurrentForm, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -298,4 +341,7 @@ Partial Class Principal
     Friend WithEvents IconCurrentForm As FontAwesome.Sharp.IconPictureBox
     Friend WithEvents PanelDesktop As Panel
     Friend WithEvents btnCalcular As FontAwesome.Sharp.IconButton
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents optSI As RadioButton
+    Friend WithEvents optEs As RadioButton
 End Class

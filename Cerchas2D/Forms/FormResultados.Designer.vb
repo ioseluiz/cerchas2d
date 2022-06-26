@@ -42,18 +42,18 @@ Partial Class FormResultados
         '
         Me.lstDesplazamientos.FormattingEnabled = True
         Me.lstDesplazamientos.ItemHeight = 16
-        Me.lstDesplazamientos.Location = New System.Drawing.Point(541, 46)
+        Me.lstDesplazamientos.Location = New System.Drawing.Point(531, 37)
         Me.lstDesplazamientos.Name = "lstDesplazamientos"
-        Me.lstDesplazamientos.Size = New System.Drawing.Size(387, 180)
+        Me.lstDesplazamientos.Size = New System.Drawing.Size(228, 148)
         Me.lstDesplazamientos.TabIndex = 1
         '
         'lstReacciones
         '
         Me.lstReacciones.FormattingEnabled = True
         Me.lstReacciones.ItemHeight = 16
-        Me.lstReacciones.Location = New System.Drawing.Point(541, 254)
+        Me.lstReacciones.Location = New System.Drawing.Point(531, 204)
         Me.lstReacciones.Name = "lstReacciones"
-        Me.lstReacciones.Size = New System.Drawing.Size(387, 212)
+        Me.lstReacciones.Size = New System.Drawing.Size(228, 148)
         Me.lstReacciones.TabIndex = 2
         '
         'FormResultados

@@ -1,10 +1,10 @@
 ﻿Public Class Cercha
     Public cantElementos As Integer, arrayElementos() As Elemento, cantNodos As Integer, arrayNodos() As Nodo, arrayCargas() As Carga, arrayRestricciones() As Restriccion
-    Public K(,) As Double, P() As Double, D() As Object, F() As Object
+    Public K(,) As Double, P() As Double, D() As Object, F() As Object, DespApoyos() As Double
     Public KFF(,) As Double, PF() As Double, KFS(,) As Double, KSF(,) As Double, KSS(,) As Double, PS() As Double, DS() As Double
-    Public FC() As Double, MatA(,) As Double
+    Public FC() As Double, MatA(,) As Double, HF() As Double, FD() As Double, FE() As Double, FS() As Double
     Public incognitasDesp As Integer, incognitasFuerza As Integer
-    Public Q() As Double, Solucion As String
+    Public Q() As Double, Solucion As String, DesplazamientosCalculados() As String, ReaccionesCalculadas() As String
     Public Pos() As Integer, Posf() As Integer
 
     Public Sub New(vectorNodos() As Nodo, vectorElementos() As Elemento, vectorCargas() As Carga, vectorRestricciones() As Restriccion)
@@ -59,7 +59,9 @@
         ConstruirSubVectorPS()
         'Subdividir Vector D
         ConstruirSubVectorDS()
-        'Solucion de la ecuacion para {DF} la ecuacion: {FF} + {PF} - {SP} = [KFF]{DF} + [KFS]{DS}
+        ReDim HF(incognitasDesp)
+        HF = MultMatVec(KFS, DS)
+        'Solucion de la ecuacion para {DF} la ecuacion: {FF} + {PF} - {SPF} = [KFF]{DF} + [KFS]{DS}
         ConstruirVectorFC()
         ReDim MatA(incognitasDesp, incognitasDesp + 1)
         MatA = ObtenerMatrizAumentada(KFF, FC, incognitasDesp)
@@ -77,6 +79,27 @@
             Console.WriteLine("SOLUCION = " + Solucion)
             Console.WriteLine(Q(i))
         Next
+
+        ReDim DesplazamientosCalculados(incognitasDesp)
+        DesplazamientosCalculados = ConstruccionDesplazamientosCalculados(D, Q, incognitasDesp)
+
+        'Calcular las Reacciones, resolviendo para {FS} la ecuacion: {FS} = [KSF]{DF} + [KSS]{DS} + {SPS} - {PS}
+        '{FD} = [KSF]{DF}
+        '{FE} = [KSS]{DS}
+        ReDim FD(incognitasFuerza), FE(incognitasFuerza)
+        FD = MultMatVec(KSF, Q)
+        FE = MultMatVec(KSS, DS)
+        ReDim FS(incognitasFuerza)
+        FS = CalcularReacciones(FD, FE, PS)
+
+        'Imprimir las reacciones calculadas
+        Console.WriteLine("Reacciones")
+        For i = 1 To incognitasFuerza
+            Console.WriteLine(FS(i))
+
+        Next
+        ReDim ReaccionesCalculadas(incognitasFuerza)
+        ReaccionesCalculadas = ConstruccionReaccionesCalculadas(F, FS, incognitasFuerza)
 
 
 
@@ -127,9 +150,20 @@
     End Sub
 
     Public Sub ConstruirVectorDesplazamientos()
+
+        'Desplazamientos inducidos en apoyos
+        ReDim DespApoyos(2 * cantNodos)
+        For i = 1 To cantNodos
+            'Desplazamiento en x
+            DespApoyos(2 * i - 1) = arrayNodos(i).deltax
+            'Desplazamiento en y
+            DespApoyos(2 * i) = arrayNodos(i).deltay
+        Next
+
+
         For i = 1 To 2 * cantNodos
             If arrayRestricciones(i).tipoRestriccion = True Then
-                D(i) = 0
+                D(i) = 0 + DespApoyos(i)
                 If (-1) ^ i < 0 Then
                     F(i) = "Rx" + Str(arrayRestricciones(i).idNodo)
                 Else
@@ -263,9 +297,20 @@
     Public Sub ConstruirVectorFC()
         ReDim FC(incognitasDesp)
         For i = 1 To incognitasDesp
-            FC(i) = PF(i)
+            FC(i) = PF(i) - HF(i)
         Next
     End Sub
+
+    Public Function CalcularReacciones(VectorFD() As Double, VectorFE() As Double, VectorPS() As Double) As Double()
+        Dim Resultado(VectorFD.GetLength(0) - 1) As Double
+        For i = 1 To VectorFD.GetLength(0) - 1
+            Resultado(i) = VectorFD(i) + VectorFE(i) - VectorPS(i)
+        Next
+        Return Resultado
+
+    End Function
+
+
 
     Public Function ObtenerMatrizAumentada(ByVal M1(,) As Double, V1() As Double, incognitas As Integer) As Double(,)
         Dim AA(incognitas, incognitas + 1) As Double
@@ -357,6 +402,53 @@
 
 
     End Sub
+
+    Public Function ConstruccionDesplazamientosCalculados(ByVal VectorD() As Object, ByVal VectorQ() As Double, ByVal cantidad As Integer) As String()
+        Dim VectorResultados(cantidad) As String
+        For i = 1 To cantidad
+            VectorResultados(i) = CType(VectorD(Pos(i)), String) + " = " + CType(Math.Round(VectorQ(i), 5), String)
+        Next
+        Return VectorResultados
+    End Function
+
+    Public Function ConstruccionReaccionesCalculadas(ByVal VectorF() As Object, ByVal VectorFS() As Double, ByVal cantidad As Integer) As String()
+        Dim VectorResultados(cantidad) As String
+        For i = 1 To cantidad
+            VectorResultados(i) = CType(VectorF(Posf(i)), String) + " = " + CType(Math.Round(VectorFS(i), 2), String)
+        Next
+        Return VectorResultados
+    End Function
+
+    Public Function GetDesplazamientosCalculados() As String()
+        Return DesplazamientosCalculados
+    End Function
+
+    Public Function GetReaccionesCalculadas() As String()
+        Return ReaccionesCalculadas
+    End Function
+
+    Public Function GetCantIncognitasDesp() As Integer
+        Return incognitasDesp
+    End Function
+
+    Public Function GetCantIncognitasFuerza() As Integer
+        Return incognitasFuerza
+    End Function
+
+    Public Function MultMatVec(ByVal M1(,) As Double, ByVal V1() As Double) As Double()
+        Dim Resultado(M1.GetLength(0) - 1) As Double
+        Dim suma As Double
+        For i = 1 To M1.GetLength(0) - 1
+            suma = 0
+            For j = 1 To V1.GetLength(0) - 1
+                suma += M1(i, j) * V1(j)
+            Next
+            Resultado(i) = suma
+        Next
+        Return Resultado
+    End Function
+
+
 
 
 End Class

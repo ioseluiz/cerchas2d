@@ -11,10 +11,11 @@ Public Class Principal
     Private leftBorderBtn As Panel
     Private currentChildForm As Form
 
-    Dim nodoId As Integer, _x As Double, _y As Double
+    Dim nodoId As Integer, _x As Double, _y As Double, despx As Double, despy As Double
     Dim elementoId As Integer, nodoInicio As Integer, nodoFinal As Integer, areaElem As Double, modElem As Double
     Dim vnodo() As Nodo, velemento() As Elemento, vcarga() As Carga, vrestriccion() As Restriccion
 
+    Dim cantDesp As Integer, Desplazamientos() As String, cantReacciones As Integer, Reacciones() As String
     'Constructor
     Public Sub New()
 
@@ -130,7 +131,9 @@ Public Class Principal
             nodoId = FormNodos.dgvJoints.Rows(i - 1).Cells(0).Value
             _x = FormNodos.dgvJoints.Rows(i - 1).Cells(1).Value
             _y = FormNodos.dgvJoints.Rows(i - 1).Cells(2).Value
-            vnodo(i) = New Nodo(nodoId, _x, _y)
+            despx = FormNodos.dgvJoints.Rows(i - 1).Cells(3).Value
+            despy = FormNodos.dgvJoints.Rows(i - 1).Cells(4).Value
+            vnodo(i) = New Nodo(nodoId, _x, _y, despx, despy)
             If FormNodos.dgvJoints.Rows(i - 1).Cells(3).Value = True Then
                 vrestriccion(2 * i - 1) = New Restriccion(2 * i - 1, nodoId, True)
             Else
@@ -174,7 +177,22 @@ Public Class Principal
         'Crear estructura de cercha compuesta de objetos de elementos
         Dim estructura As Cercha = New Cercha(vnodo, velemento, vcarga, vrestriccion)
 
-        'Solucion del sistema de ecuaciones
+        'Obtner Resultados de Desplazamientos de Solucion del sistema de ecuaciones
+        cantDesp = estructura.GetCantIncognitasDesp()
+        ReDim Desplazamientos(cantDesp)
+        Desplazamientos = estructura.GetDesplazamientosCalculados()
+        'Imprimir los desplazamientos calculados en el listbox de desplazamientos
+        For i = 1 To cantDesp
+            FormResultados.lstDesplazamientos.Items.Add(Desplazamientos(i))
+        Next
+        'Obtener Resultados de Reacciones de Solucion del sistema de ecuaciones
+        cantReacciones = estructura.GetCantIncognitasFuerza()
+        ReDim Reacciones(cantReacciones)
+        Reacciones = estructura.GetReaccionesCalculadas()
+        'Imprimir las reacciones en el listbox de reacciones
+        For i = 1 To cantReacciones
+            FormResultados.lstReacciones.Items.Add(Reacciones(i))
+        Next
 
 
 

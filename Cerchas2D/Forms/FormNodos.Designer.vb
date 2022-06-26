@@ -28,6 +28,8 @@ Partial Class FormNodos
         Me.CoorY = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Rx = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.Ry = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.deltax = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.deltay = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dgvJoints, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -36,9 +38,9 @@ Partial Class FormNodos
         Me.dgvJoints.AllowUserToAddRows = False
         Me.dgvJoints.AllowUserToDeleteRows = False
         Me.dgvJoints.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvJoints.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Nodo, Me.CoorX, Me.CoorY, Me.Rx, Me.Ry})
+        Me.dgvJoints.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Nodo, Me.CoorX, Me.CoorY, Me.Rx, Me.Ry, Me.deltax, Me.deltay})
         Me.dgvJoints.Location = New System.Drawing.Point(99, 85)
-        Me.dgvJoints.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dgvJoints.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvJoints.Name = "dgvJoints"
         Me.dgvJoints.RowHeadersVisible = False
         Me.dgvJoints.RowHeadersWidth = 51
@@ -50,35 +52,49 @@ Partial Class FormNodos
         Me.Nodo.HeaderText = "Nodo"
         Me.Nodo.MinimumWidth = 6
         Me.Nodo.Name = "Nodo"
-        Me.Nodo.Width = 125
+        Me.Nodo.Width = 80
         '
         'CoorX
         '
         Me.CoorX.HeaderText = "X"
         Me.CoorX.MinimumWidth = 6
         Me.CoorX.Name = "CoorX"
-        Me.CoorX.Width = 125
+        Me.CoorX.Width = 80
         '
         'CoorY
         '
         Me.CoorY.HeaderText = "Y"
         Me.CoorY.MinimumWidth = 6
         Me.CoorY.Name = "CoorY"
-        Me.CoorY.Width = 125
+        Me.CoorY.Width = 80
         '
         'Rx
         '
         Me.Rx.HeaderText = "Rx"
         Me.Rx.MinimumWidth = 6
         Me.Rx.Name = "Rx"
-        Me.Rx.Width = 125
+        Me.Rx.Width = 80
         '
         'Ry
         '
         Me.Ry.HeaderText = "Ry"
         Me.Ry.MinimumWidth = 6
         Me.Ry.Name = "Ry"
-        Me.Ry.Width = 125
+        Me.Ry.Width = 80
+        '
+        'deltax
+        '
+        Me.deltax.HeaderText = "Δx"
+        Me.deltax.MinimumWidth = 6
+        Me.deltax.Name = "deltax"
+        Me.deltax.Width = 80
+        '
+        'deltay
+        '
+        Me.deltay.HeaderText = "Δy"
+        Me.deltay.MinimumWidth = 6
+        Me.deltay.Name = "deltay"
+        Me.deltay.Width = 80
         '
         'FormNodos
         '
@@ -86,7 +102,7 @@ Partial Class FormNodos
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1067, 554)
         Me.Controls.Add(Me.dgvJoints)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "FormNodos"
         Me.Text = "FormNodos"
         CType(Me.dgvJoints, System.ComponentModel.ISupportInitialize).EndInit()
@@ -100,4 +116,6 @@ Partial Class FormNodos
     Friend WithEvents CoorY As DataGridViewTextBoxColumn
     Friend WithEvents Rx As DataGridViewCheckBoxColumn
     Friend WithEvents Ry As DataGridViewCheckBoxColumn
+    Friend WithEvents deltax As DataGridViewTextBoxColumn
+    Friend WithEvents deltay As DataGridViewTextBoxColumn
 End Class
