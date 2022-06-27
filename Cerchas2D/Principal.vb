@@ -12,7 +12,7 @@ Public Class Principal
     Private currentChildForm As Form
 
     Dim nodoId As Integer, _x As Double, _y As Double, despx As Double, despy As Double
-    Dim elementoId As Integer, nodoInicio As Integer, nodoFinal As Integer, areaElem As Double, modElem As Double
+    Dim elementoId As Integer, nodoInicio As Integer, nodoFinal As Integer, areaElem As Double, modElem As Double, gamma As Double, deltaTemp As Double, deltaFab As Double
     Dim vnodo() As Nodo, velemento() As Elemento, vcarga() As Carga, vrestriccion() As Restriccion
 
     Dim cantDesp As Integer, Desplazamientos() As String, cantReacciones As Integer, Reacciones() As String
@@ -154,7 +154,10 @@ Public Class Principal
             nodoFinal = FormElementos.dgvElementos.Rows(i - 1).Cells(2).Value
             areaElem = FormElementos.dgvElementos.Rows(i - 1).Cells(3).Value
             modElem = FormElementos.dgvElementos.Rows(i - 1).Cells(4).Value
-            velemento(i) = New Elemento(elementoId, vnodo(nodoInicio), vnodo(nodoFinal), areaElem, modElem)
+            gamma = CType(FormElementos.txtgamma.Text, Double)
+            deltaTemp = FormElementos.dgvElementos.Rows(i - 1).Cells(5).Value
+            deltaFab = FormElementos.dgvElementos.Rows(i - 1).Cells(6).Value
+            velemento(i) = New Elemento(elementoId, vnodo(nodoInicio), vnodo(nodoFinal), areaElem, modElem, gamma, deltaTemp, deltaFab)
 
 
         Next

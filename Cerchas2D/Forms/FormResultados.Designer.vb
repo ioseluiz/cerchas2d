@@ -25,6 +25,7 @@ Partial Class FormResultados
         Me.picBoxDiagram = New System.Windows.Forms.PictureBox()
         Me.lstDesplazamientos = New System.Windows.Forms.ListBox()
         Me.lstReacciones = New System.Windows.Forms.ListBox()
+        Me.lstFuerzas = New System.Windows.Forms.ListBox()
         CType(Me.picBoxDiagram, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -34,7 +35,7 @@ Partial Class FormResultados
         Me.picBoxDiagram.Location = New System.Drawing.Point(16, 37)
         Me.picBoxDiagram.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.picBoxDiagram.Name = "picBoxDiagram"
-        Me.picBoxDiagram.Size = New System.Drawing.Size(480, 443)
+        Me.picBoxDiagram.Size = New System.Drawing.Size(480, 480)
         Me.picBoxDiagram.TabIndex = 0
         Me.picBoxDiagram.TabStop = False
         '
@@ -42,25 +43,35 @@ Partial Class FormResultados
         '
         Me.lstDesplazamientos.FormattingEnabled = True
         Me.lstDesplazamientos.ItemHeight = 16
-        Me.lstDesplazamientos.Location = New System.Drawing.Point(531, 37)
+        Me.lstDesplazamientos.Location = New System.Drawing.Point(531, 32)
         Me.lstDesplazamientos.Name = "lstDesplazamientos"
-        Me.lstDesplazamientos.Size = New System.Drawing.Size(228, 148)
+        Me.lstDesplazamientos.Size = New System.Drawing.Size(228, 164)
         Me.lstDesplazamientos.TabIndex = 1
         '
         'lstReacciones
         '
         Me.lstReacciones.FormattingEnabled = True
         Me.lstReacciones.ItemHeight = 16
-        Me.lstReacciones.Location = New System.Drawing.Point(531, 204)
+        Me.lstReacciones.Location = New System.Drawing.Point(531, 202)
         Me.lstReacciones.Name = "lstReacciones"
         Me.lstReacciones.Size = New System.Drawing.Size(228, 148)
         Me.lstReacciones.TabIndex = 2
+        '
+        'lstFuerzas
+        '
+        Me.lstFuerzas.FormattingEnabled = True
+        Me.lstFuerzas.ItemHeight = 16
+        Me.lstFuerzas.Location = New System.Drawing.Point(531, 369)
+        Me.lstFuerzas.Name = "lstFuerzas"
+        Me.lstFuerzas.Size = New System.Drawing.Size(228, 148)
+        Me.lstFuerzas.TabIndex = 3
         '
         'FormResultados
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1067, 554)
+        Me.Controls.Add(Me.lstFuerzas)
         Me.Controls.Add(Me.lstReacciones)
         Me.Controls.Add(Me.lstDesplazamientos)
         Me.Controls.Add(Me.picBoxDiagram)
@@ -75,4 +86,5 @@ Partial Class FormResultados
     Friend WithEvents picBoxDiagram As PictureBox
     Friend WithEvents lstDesplazamientos As ListBox
     Friend WithEvents lstReacciones As ListBox
+    Friend WithEvents lstFuerzas As ListBox
 End Class

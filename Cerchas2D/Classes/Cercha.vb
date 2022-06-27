@@ -1,6 +1,6 @@
 ﻿Public Class Cercha
     Public cantElementos As Integer, arrayElementos() As Elemento, cantNodos As Integer, arrayNodos() As Nodo, arrayCargas() As Carga, arrayRestricciones() As Restriccion
-    Public K(,) As Double, P() As Double, D() As Object, F() As Object, DespApoyos() As Double
+    Public K(,) As Double, P() As Double, D() As Object, F() As Object, SP() As Double, DespApoyos() As Double
     Public KFF(,) As Double, PF() As Double, KFS(,) As Double, KSF(,) As Double, KSS(,) As Double, PS() As Double, DS() As Double
     Public FC() As Double, MatA(,) As Double, HF() As Double, FD() As Double, FE() As Double, FS() As Double
     Public incognitasDesp As Integer, incognitasFuerza As Integer
@@ -16,7 +16,7 @@
         arrayNodos = vectorNodos
         arrayCargas = vectorCargas
         arrayRestricciones = vectorRestricciones
-        ReDim K(2 * cantNodos, 2 * cantNodos), P(2 * cantNodos), D(2 * cantNodos), F(2 * cantNodos)
+        ReDim K(2 * cantNodos, 2 * cantNodos), P(2 * cantNodos), D(2 * cantNodos), F(2 * cantNodos), SP(2 * cantNodos)
         ConstruirMatrizRigidezGlobal() '{K}
         Console.WriteLine("Matriz de Rigidez [K]")
         For i = 1 To 2 * cantNodos
@@ -147,6 +147,35 @@
             P(2 * idJoint) = Py
         Next
 
+    End Sub
+
+    Public Sub ConstruirSolucionParticular()
+        Dim idElemento As Integer, startJoint As Integer, endJoint As Integer
+        For i = 1 To cantElementos
+            idElemento = arrayElementos(i).id
+            startJoint = arrayElementos(i).Ni.id_nodo
+            endJoint = arrayElementos(i).Nj.id_nodo
+            'Errores de Fabricacion
+            'Nodo inicial
+            'Carga de Error de Fabricacion en X
+            SP(2 * startJoint - 1) += arrayElementos(i).errorFabGlobal(1)
+            'Carga de Error de Fabricacion en Y
+            SP(2 * startJoint) += arrayElementos(i).errorFabGlobal(2)
+            'Nodo Final
+            SP(2 * endJoint - 1) += arrayElementos(i).errorFabGlobal(3)
+            'Carga de Error de Fabricacion en Y
+            SP(2 * endJoint) += arrayElementos(i).errorFabGlobal(4)
+
+            'Cambio de Temperatura
+            'Nodo Inicial
+            SP(2 * startJoint - 1) += arrayElementos(i).cambioTempGlobal(1)
+            SP(2 * startJoint) += arrayElementos(i).cambioTempGlobal(2)
+            'Nodo Final
+            SP(2 * endJoint - 1) += arrayElementos(i).cambioTempGlobal(3)
+            SP(2 * endJoint) += arrayElementos(i).cambioTempGlobal(4)
+
+
+        Next
     End Sub
 
     Public Sub ConstruirVectorDesplazamientos()

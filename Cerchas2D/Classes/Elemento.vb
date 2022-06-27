@@ -1,10 +1,10 @@
 ﻿Public Class Elemento
-    Public id As Integer, Ni As Nodo, Nj As Nodo, ar As Double, modE As Double
+    Public id As Integer, Ni As Nodo, Nj As Nodo, ar As Double, modE As Double, gammaT As Double, deltaTemp As Double, deltaFab As Double
     Dim longitud As Double, coseno As Double, seno As Double
-    Public KL(4, 4) As Double, T(4, 4) As Double, TT(4, 4) As Double, KG(4, 4) As Double
+    Public KL(4, 4) As Double, T(4, 4) As Double, TT(4, 4) As Double, KG(4, 4) As Double, q0() As Double, errorFabGlobal(4) As Double, qT() As Double, cambioTempGlobal(4) As Double
 
 
-    Public Sub New(ByVal elem_id As Integer, ByVal nodoInicial As Nodo, ByVal nodoFinal As Nodo, area As Double, moduElast As Double)
+    Public Sub New(ByVal elem_id As Integer, ByVal nodoInicial As Nodo, ByVal nodoFinal As Nodo, area As Double, moduElast As Double, gamma As Double, tempDelta As Double, fabDelta As Double)
 
         'Constructor
         id = elem_id
@@ -12,6 +12,9 @@
         Nj = nodoFinal
         ar = area
         modE = moduElast
+        gammaT = gamma
+        deltaTemp = tempDelta
+        deltaFab = fabDelta
         calcular_longitud()
         calcular_coseno()
         calcular_seno()
@@ -27,6 +30,11 @@
                 Console.WriteLine(Str(KG(i, j)))
             Next
         Next
+
+        ConstruirVectorErrorFabLocal()
+        errorFabGlobal = MultMatVec(TT, q0)
+        ConstruirVectorEfectosTemp()
+        cambioTempGlobal = MultMatVec(TT, qT)
 
 
     End Sub
@@ -99,9 +107,7 @@
 
     End Sub
 
-    Public Sub ConstruirMatrizRigidezGlobal()
 
-    End Sub
 
     Public Function MMultMatrices(M1(,) As Double, M2(,) As Double) As Double(,)
         Dim Resultado As Double(,)
@@ -121,6 +127,37 @@
 
 
 
+    Public Sub ConstruirVectorEfectosTemp()
+        ReDim qT(4)
+        qT(1) = -gammaT * deltaTemp * ar * modE
+        qT(2) = 0
+        qT(3) = gammaT * deltaTemp * ar * modE
+        qT(4) = 0
+    End Sub
+
+    Public Sub ConstruirVectorErrorFabLocal()
+        ReDim q0(4)
+        q0(1) = -modE * ar * deltaFab / longitud
+        q0(2) = 0
+        q0(3) = modE * ar * deltaFab / longitud
+        q0(4) = 0
+
+
+    End Sub
+
+
+    Public Function MultMatVec(ByVal M1(,) As Double, ByVal V1() As Double) As Double()
+        Dim Resultado(M1.GetLength(0) - 1) As Double
+        Dim suma As Double
+        For i = 1 To M1.GetLength(0) - 1
+            suma = 0
+            For j = 1 To V1.GetLength(0) - 1
+                suma += M1(i, j) * V1(j)
+            Next
+            Resultado(i) = suma
+        Next
+        Return Resultado
+    End Function
 
 
 
