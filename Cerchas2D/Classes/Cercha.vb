@@ -533,7 +533,7 @@
             FL = MultMatVec(arrayElementos(i).T, FG)
 
             For j = 1 To 4
-                FuerzasInternas(i, j) = CType(FL(j), String)
+                FuerzasInternas(i, j) = CType(Math.Round(FL(j), 2), String)
             Next
 
         Next

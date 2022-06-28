@@ -23,8 +23,6 @@ Partial Class FormElementos
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.dgvElementos = New System.Windows.Forms.DataGridView()
-        Me.lblFactor = New System.Windows.Forms.Label()
-        Me.txtgamma = New System.Windows.Forms.TextBox()
         Me.Elemento = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Inicio = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Fin = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -32,6 +30,8 @@ Partial Class FormElementos
         Me.Area = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.deltaT = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Fabricacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.lblFactor = New System.Windows.Forms.Label()
+        Me.txtgamma = New System.Windows.Forms.TextBox()
         CType(Me.dgvElementos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -41,29 +41,12 @@ Partial Class FormElementos
         Me.dgvElementos.AllowUserToDeleteRows = False
         Me.dgvElementos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvElementos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Elemento, Me.Inicio, Me.Fin, Me.modE, Me.Area, Me.deltaT, Me.Fabricacion})
-        Me.dgvElementos.Location = New System.Drawing.Point(33, 97)
-        Me.dgvElementos.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dgvElementos.Location = New System.Drawing.Point(25, 79)
         Me.dgvElementos.Name = "dgvElementos"
         Me.dgvElementos.RowHeadersVisible = False
         Me.dgvElementos.RowHeadersWidth = 51
-        Me.dgvElementos.Size = New System.Drawing.Size(837, 356)
+        Me.dgvElementos.Size = New System.Drawing.Size(628, 289)
         Me.dgvElementos.TabIndex = 0
-        '
-        'lblFactor
-        '
-        Me.lblFactor.AutoSize = True
-        Me.lblFactor.Location = New System.Drawing.Point(715, 55)
-        Me.lblFactor.Name = "lblFactor"
-        Me.lblFactor.Size = New System.Drawing.Size(28, 17)
-        Me.lblFactor.TabIndex = 1
-        Me.lblFactor.Text = "α ="
-        '
-        'txtgamma
-        '
-        Me.txtgamma.Location = New System.Drawing.Point(742, 52)
-        Me.txtgamma.Name = "txtgamma"
-        Me.txtgamma.Size = New System.Drawing.Size(80, 22)
-        Me.txtgamma.TabIndex = 2
         '
         'Elemento
         '
@@ -114,17 +97,34 @@ Partial Class FormElementos
         Me.Fabricacion.Name = "Fabricacion"
         Me.Fabricacion.Width = 125
         '
+        'lblFactor
+        '
+        Me.lblFactor.AutoSize = True
+        Me.lblFactor.Location = New System.Drawing.Point(536, 45)
+        Me.lblFactor.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblFactor.Name = "lblFactor"
+        Me.lblFactor.Size = New System.Drawing.Size(23, 13)
+        Me.lblFactor.TabIndex = 1
+        Me.lblFactor.Text = "α ="
+        '
+        'txtgamma
+        '
+        Me.txtgamma.Location = New System.Drawing.Point(556, 42)
+        Me.txtgamma.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtgamma.Name = "txtgamma"
+        Me.txtgamma.Size = New System.Drawing.Size(61, 20)
+        Me.txtgamma.TabIndex = 2
+        '
         'FormElementos
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(933, 550)
+        Me.ClientSize = New System.Drawing.Size(700, 447)
         Me.Controls.Add(Me.txtgamma)
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.dgvElementos)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "FormElementos"
-        Me.Text = "FormElementos"
+        Me.Text = "Elementos"
         CType(Me.dgvElementos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

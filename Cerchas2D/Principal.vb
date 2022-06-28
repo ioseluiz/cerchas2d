@@ -226,9 +226,10 @@ Public Class Principal
         maxCoordenada = FindMax(vnodo, nodos)
         Dim coordenadasDibujo(,) As Double = Extraer_coordenadas(velemento, elementos, xInicial, yInicial, maxCoordenada, W, H)
         'Establecer coordenadas del area del dibujo
+        Dim coorNodos(,) As Double = ExtraerCoordNodos(vnodo, xInicial, yInicial, maxCoordenada, W, H, vrestriccion)
 
 
-        FormResultados.DrawImage(coordenadasDibujo)
+        FormResultados.DrawImage(coordenadasDibujo, coorNodos)
 
     End Sub
 
@@ -246,6 +247,28 @@ Public Class Principal
         Next
 
         Return coordenadas
+    End Function
+
+    Private Function ExtraerCoordNodos(ByVal vectorNodo() As Nodo, xInicio As Double, yInicio As Double, maximo As Double, ancho As Double, altura As Double, vectorRestriccion() As Restriccion) As Double(,)
+        Dim Resultado(nodos, 4) As Double
+        For i = 1 To nodos
+            Resultado(i, 1) = xInicio + vectorNodo(i).x * 0.8 * ancho / maximo
+            Resultado(i, 2) = yInicio - vectorNodo(i).y * 0.8 * altura / maximo
+            If vectorRestriccion(2 * i - 1).tipoRestriccion = True Then
+                Resultado(i, 3) = 1
+            Else
+                Resultado(i, 3) = 0
+
+            End If
+            If vectorRestriccion(2 * i).tipoRestriccion = True Then
+                Resultado(i, 4) = 1
+            Else
+                Resultado(i, 4) = 0
+
+            End If
+
+        Next
+        Return Resultado
     End Function
 
     Private Function FindMax(ByVal vector() As Nodo, ByVal cantNodos As Integer) As Double

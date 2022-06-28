@@ -24,7 +24,8 @@
         Next
 
 
-
+        Button1.Enabled = False
+        Button1.BackColor = Color.FromArgb(83, 77, 86)
 
 
 

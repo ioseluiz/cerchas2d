@@ -39,12 +39,11 @@ Partial Class FormNodos
         Me.dgvJoints.AllowUserToDeleteRows = False
         Me.dgvJoints.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvJoints.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Nodo, Me.CoorX, Me.CoorY, Me.Rx, Me.Ry, Me.deltax, Me.deltay})
-        Me.dgvJoints.Location = New System.Drawing.Point(99, 85)
-        Me.dgvJoints.Margin = New System.Windows.Forms.Padding(4)
+        Me.dgvJoints.Location = New System.Drawing.Point(74, 69)
         Me.dgvJoints.Name = "dgvJoints"
         Me.dgvJoints.RowHeadersVisible = False
         Me.dgvJoints.RowHeadersWidth = 51
-        Me.dgvJoints.Size = New System.Drawing.Size(749, 329)
+        Me.dgvJoints.Size = New System.Drawing.Size(562, 267)
         Me.dgvJoints.TabIndex = 0
         '
         'Nodo
@@ -98,13 +97,12 @@ Partial Class FormNodos
         '
         'FormNodos
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1067, 554)
+        Me.ClientSize = New System.Drawing.Size(800, 450)
         Me.Controls.Add(Me.dgvJoints)
-        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "FormNodos"
-        Me.Text = "FormNodos"
+        Me.Text = "Nodos"
         CType(Me.dgvJoints, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
