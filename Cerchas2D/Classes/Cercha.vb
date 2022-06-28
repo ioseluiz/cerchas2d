@@ -1,11 +1,11 @@
 ﻿Public Class Cercha
     Public cantElementos As Integer, arrayElementos() As Elemento, cantNodos As Integer, arrayNodos() As Nodo, arrayCargas() As Carga, arrayRestricciones() As Restriccion
     Public K(,) As Double, P() As Double, D() As Object, F() As Object, SP() As Double, DespApoyos() As Double
-    Public KFF(,) As Double, PF() As Double, KFS(,) As Double, KSF(,) As Double, KSS(,) As Double, PS() As Double, DS() As Double
+    Public KFF(,) As Double, PF() As Double, KFS(,) As Double, KSF(,) As Double, KSS(,) As Double, PS() As Double, DS() As Double, SPF() As Double, SPS() As Double
     Public FC() As Double, MatA(,) As Double, HF() As Double, FD() As Double, FE() As Double, FS() As Double
     Public incognitasDesp As Integer, incognitasFuerza As Integer
-    Public Q() As Double, Solucion As String, DesplazamientosCalculados() As String, ReaccionesCalculadas() As String
-    Public Pos() As Integer, Posf() As Integer
+    Public Q() As Double, Solucion As String, DesplazamientosCalculados() As String, ReaccionesCalculadas() As String, FuerzasInternas(,) As String
+    Public Pos() As Integer, Posf() As Integer, DG() As Double, DL() As Double, FG() As Double, FL() As Double
 
     Public Sub New(vectorNodos() As Nodo, vectorElementos() As Elemento, vectorCargas() As Carga, vectorRestricciones() As Restriccion)
         'Constructor de la clase
@@ -26,6 +26,12 @@
             Next
         Next
         ConstruirVectorCargas() '{P}
+
+        ConstruirSolucionParticular() '{SP}
+        Console.WriteLine("Vector solucion particular {SP}")
+        For i = 1 To 2 * cantNodos
+            Console.WriteLine(CType(SP(i), String))
+        Next
 
         ConstruirVectorDesplazamientos() '{D} y {F}
         Console.WriteLine("Vector Desplazamientos")
@@ -57,10 +63,17 @@
         'Subdividir vector P
         ConstruirSubVectorPF()
         ConstruirSubVectorPS()
+        'Subdividir vector {SP}
+        ConstruirSubVectorSPF()
+        ConstruirSubVectorSPS()
         'Subdividir Vector D
         ConstruirSubVectorDS()
         ReDim HF(incognitasDesp)
         HF = MultMatVec(KFS, DS)
+        Console.WriteLine("HF")
+        For i = 1 To incognitasDesp
+            Console.WriteLine(Str(HF(i)))
+        Next
         'Solucion de la ecuacion para {DF} la ecuacion: {FF} + {PF} - {SPF} = [KFF]{DF} + [KFS]{DS}
         ConstruirVectorFC()
         ReDim MatA(incognitasDesp, incognitasDesp + 1)
@@ -90,7 +103,7 @@
         FD = MultMatVec(KSF, Q)
         FE = MultMatVec(KSS, DS)
         ReDim FS(incognitasFuerza)
-        FS = CalcularReacciones(FD, FE, PS)
+        FS = CalcularReacciones(FD, FE, PS, SPS)
 
         'Imprimir las reacciones calculadas
         Console.WriteLine("Reacciones")
@@ -100,6 +113,10 @@
         Next
         ReDim ReaccionesCalculadas(incognitasFuerza)
         ReaccionesCalculadas = ConstruccionReaccionesCalculadas(F, FS, incognitasFuerza)
+
+        'Calcular las Fuerzas Internas de los Elementos
+        CalcularFuerzasInternas()
+
 
 
 
@@ -182,11 +199,15 @@
 
         'Desplazamientos inducidos en apoyos
         ReDim DespApoyos(2 * cantNodos)
+        Console.WriteLine("Vector desplazamientos inducidos en los apoyos")
         For i = 1 To cantNodos
+            Console.WriteLine("Nudo " + CType(i, String))
             'Desplazamiento en x
             DespApoyos(2 * i - 1) = arrayNodos(i).deltax
+            Console.WriteLine("X " + Str(DespApoyos(2 * i - 1)))
             'Desplazamiento en y
             DespApoyos(2 * i) = arrayNodos(i).deltay
+            Console.WriteLine("Y " + Str(DespApoyos(2 * i)))
         Next
 
 
@@ -316,6 +337,20 @@
         Next
     End Sub
 
+    Public Sub ConstruirSubVectorSPF()
+        ReDim SPF(incognitasDesp)
+        For i = 1 To incognitasDesp
+            SPF(i) = SP(Pos(i))
+        Next
+    End Sub
+
+    Public Sub ConstruirSubVectorSPS()
+        ReDim SPS(incognitasFuerza)
+        For i = 1 To incognitasFuerza
+            SPS(i) = SP(Posf(i))
+        Next
+    End Sub
+
     Public Sub ConstruirSubVectorDS()
         ReDim DS(incognitasFuerza)
         For i = 1 To incognitasFuerza
@@ -326,14 +361,14 @@
     Public Sub ConstruirVectorFC()
         ReDim FC(incognitasDesp)
         For i = 1 To incognitasDesp
-            FC(i) = PF(i) - HF(i)
+            FC(i) = PF(i) - HF(i) - SPF(i)
         Next
     End Sub
 
-    Public Function CalcularReacciones(VectorFD() As Double, VectorFE() As Double, VectorPS() As Double) As Double()
+    Public Function CalcularReacciones(VectorFD() As Double, VectorFE() As Double, VectorPS() As Double, VectorSPS() As Double) As Double()
         Dim Resultado(VectorFD.GetLength(0) - 1) As Double
         For i = 1 To VectorFD.GetLength(0) - 1
-            Resultado(i) = VectorFD(i) + VectorFE(i) - VectorPS(i)
+            Resultado(i) = VectorFD(i) + VectorFE(i) - VectorPS(i) + VectorSPS(i)
         Next
         Return Resultado
 
@@ -475,6 +510,39 @@
             Resultado(i) = suma
         Next
         Return Resultado
+    End Function
+
+    Public Sub CalcularFuerzasInternas()
+        ReDim FuerzasInternas(cantElementos, 4)
+
+        'Reemplazar DF en {D}
+        For i = 1 To incognitasDesp
+            D(Pos(i)) = Q(i)
+        Next
+
+        'Desplazamientos de nodos en coordenadas globales
+        For i = 1 To cantElementos
+            ReDim DG(4), FG(4)
+            DG(1) = D(2 * arrayElementos(i).Ni.id_nodo - 1)
+            DG(2) = D(2 * arrayElementos(i).Ni.id_nodo)
+            DG(3) = D(2 * arrayElementos(i).Nj.id_nodo - 1)
+            DG(4) = D(2 * arrayElementos(i).Nj.id_nodo)
+
+            FG = MultMatVec(arrayElementos(i).KG, DG)
+
+            FL = MultMatVec(arrayElementos(i).T, FG)
+
+            For j = 1 To 4
+                FuerzasInternas(i, j) = CType(FL(j), String)
+            Next
+
+        Next
+
+
+    End Sub
+
+    Public Function GetFuerzasInternas() As String(,)
+        Return FuerzasInternas
     End Function
 
 

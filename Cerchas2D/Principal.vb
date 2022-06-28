@@ -15,7 +15,7 @@ Public Class Principal
     Dim elementoId As Integer, nodoInicio As Integer, nodoFinal As Integer, areaElem As Double, modElem As Double, gamma As Double, deltaTemp As Double, deltaFab As Double
     Dim vnodo() As Nodo, velemento() As Elemento, vcarga() As Carga, vrestriccion() As Restriccion
 
-    Dim cantDesp As Integer, Desplazamientos() As String, cantReacciones As Integer, Reacciones() As String
+    Dim cantDesp As Integer, Desplazamientos() As String, cantReacciones As Integer, Reacciones() As String, fInternas(,) As String
     'Constructor
     Public Sub New()
 
@@ -131,8 +131,8 @@ Public Class Principal
             nodoId = FormNodos.dgvJoints.Rows(i - 1).Cells(0).Value
             _x = FormNodos.dgvJoints.Rows(i - 1).Cells(1).Value
             _y = FormNodos.dgvJoints.Rows(i - 1).Cells(2).Value
-            despx = FormNodos.dgvJoints.Rows(i - 1).Cells(3).Value
-            despy = FormNodos.dgvJoints.Rows(i - 1).Cells(4).Value
+            despx = FormNodos.dgvJoints.Rows(i - 1).Cells(5).Value
+            despy = FormNodos.dgvJoints.Rows(i - 1).Cells(6).Value
             vnodo(i) = New Nodo(nodoId, _x, _y, despx, despy)
             If FormNodos.dgvJoints.Rows(i - 1).Cells(3).Value = True Then
                 vrestriccion(2 * i - 1) = New Restriccion(2 * i - 1, nodoId, True)
@@ -195,6 +195,22 @@ Public Class Principal
         'Imprimir las reacciones en el listbox de reacciones
         For i = 1 To cantReacciones
             FormResultados.lstReacciones.Items.Add(Reacciones(i))
+        Next
+
+        'Obtener las fuerzas internas de los elementos
+        ReDim fInternas(elementos, 4)
+        fInternas = estructura.GetFuerzasInternas()
+        'Imprimir las fuerzas internas en consola para verificacion
+        Console.WriteLine("Fuerzas Internas")
+        For i = 1 To elementos
+            Console.WriteLine("Elemento " + Str(i))
+            Console.WriteLine(fInternas(i, 1))
+            Console.WriteLine(fInternas(i, 2))
+            Console.WriteLine(fInternas(i, 3))
+            Console.WriteLine(fInternas(i, 4))
+            FormResultados.lstFuerzas.Items.Add("F" + Str(i) + " = " + fInternas(i, 1))
+
+
         Next
 
 
