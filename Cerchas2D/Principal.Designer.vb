@@ -40,12 +40,20 @@ Partial Class Principal
         Me.IconCurrentForm = New FontAwesome.Sharp.IconPictureBox()
         Me.PanelDesktop = New System.Windows.Forms.Panel()
         Me.btnMatrices = New FontAwesome.Sharp.IconButton()
+        Me.picUTP = New System.Windows.Forms.PictureBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.lblTitulo = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.PanelMenu.SuspendLayout()
         Me.PanelLogo.SuspendLayout()
         CType(Me.PicBoxLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelTitleBar.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.IconCurrentForm, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelDesktop.SuspendLayout()
+        CType(Me.picUTP, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelMenu
@@ -303,6 +311,11 @@ Partial Class Principal
         'PanelDesktop
         '
         Me.PanelDesktop.BackColor = System.Drawing.Color.White
+        Me.PanelDesktop.Controls.Add(Me.Label2)
+        Me.PanelDesktop.Controls.Add(Me.Label1)
+        Me.PanelDesktop.Controls.Add(Me.lblTitulo)
+        Me.PanelDesktop.Controls.Add(Me.PictureBox1)
+        Me.PanelDesktop.Controls.Add(Me.picUTP)
         Me.PanelDesktop.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelDesktop.Location = New System.Drawing.Point(165, 61)
         Me.PanelDesktop.Name = "PanelDesktop"
@@ -332,6 +345,56 @@ Partial Class Principal
         Me.btnMatrices.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnMatrices.UseVisualStyleBackColor = True
         '
+        'picUTP
+        '
+        Me.picUTP.Image = CType(resources.GetObject("picUTP.Image"), System.Drawing.Image)
+        Me.picUTP.Location = New System.Drawing.Point(86, 28)
+        Me.picUTP.Name = "picUTP"
+        Me.picUTP.Size = New System.Drawing.Size(170, 133)
+        Me.picUTP.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.picUTP.TabIndex = 0
+        Me.picUTP.TabStop = False
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(735, 28)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(170, 133)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 1
+        Me.PictureBox1.TabStop = False
+        '
+        'lblTitulo
+        '
+        Me.lblTitulo.AutoSize = True
+        Me.lblTitulo.Font = New System.Drawing.Font("Helvetica", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTitulo.Location = New System.Drawing.Point(386, 64)
+        Me.lblTitulo.Name = "lblTitulo"
+        Me.lblTitulo.Size = New System.Drawing.Size(264, 38)
+        Me.lblTitulo.TabIndex = 2
+        Me.lblTitulo.Text = "Proyecto No. 2A"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Helvetica", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(365, 148)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(318, 38)
+        Me.Label1.TabIndex = 3
+        Me.Label1.Text = "Análisis de Cerchas"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Helvetica", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(386, 200)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(297, 38)
+        Me.Label2.TabIndex = 4
+        Me.Label2.Text = "Método de Rigidez"
+        '
         'Principal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -352,6 +415,10 @@ Partial Class Principal
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         CType(Me.IconCurrentForm, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelDesktop.ResumeLayout(False)
+        Me.PanelDesktop.PerformLayout()
+        CType(Me.picUTP, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -373,4 +440,9 @@ Partial Class Principal
     Friend WithEvents optSI As RadioButton
     Friend WithEvents optEs As RadioButton
     Friend WithEvents btnMatrices As FontAwesome.Sharp.IconButton
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents lblTitulo As Label
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents picUTP As PictureBox
 End Class
