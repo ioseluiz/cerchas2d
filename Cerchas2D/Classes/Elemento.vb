@@ -34,7 +34,14 @@
         ConstruirVectorErrorFabLocal()
         errorFabGlobal = MultMatVec(TT, q0)
         ConstruirVectorEfectosTemp()
+
         cambioTempGlobal = MultMatVec(TT, qT)
+        Console.WriteLine("elemento no. " + Str(id))
+
+        Console.WriteLine("Vector Efectos de Temperatura coordenadas globales")
+        For i = 1 To 4
+            Console.WriteLine(Str(cambioTempGlobal(i)))
+        Next
 
 
     End Sub

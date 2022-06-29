@@ -129,10 +129,20 @@ Public Class Principal
         ReDim vnodo(nodos), vrestriccion(2 * nodos)
         For i = 1 To nodos
             nodoId = FormNodos.dgvJoints.Rows(i - 1).Cells(0).Value
-            _x = FormNodos.dgvJoints.Rows(i - 1).Cells(1).Value
-            _y = FormNodos.dgvJoints.Rows(i - 1).Cells(2).Value
-            despx = FormNodos.dgvJoints.Rows(i - 1).Cells(5).Value
-            despy = FormNodos.dgvJoints.Rows(i - 1).Cells(6).Value
+            If optEs.Checked Then
+                _x = FormNodos.dgvJoints.Rows(i - 1).Cells(1).Value * 12 'De ft a in
+                _y = FormNodos.dgvJoints.Rows(i - 1).Cells(2).Value * 12 ' De ft a in
+                despx = FormNodos.dgvJoints.Rows(i - 1).Cells(5).Value ' Ingresados en in
+                despy = FormNodos.dgvJoints.Rows(i - 1).Cells(6).Value ' Ingresados en in
+            End If
+            If optSI.Checked Then
+                _x = FormNodos.dgvJoints.Rows(i - 1).Cells(1).Value ' Ingresados en m
+                _y = FormNodos.dgvJoints.Rows(i - 1).Cells(2).Value 'Ingresados en m
+                despx = FormNodos.dgvJoints.Rows(i - 1).Cells(5).Value / 1000 ' De mm a m
+                despy = FormNodos.dgvJoints.Rows(i - 1).Cells(6).Value / 1000 ' De mm a m
+            End If
+
+
             vnodo(i) = New Nodo(nodoId, _x, _y, despx, despy)
             If FormNodos.dgvJoints.Rows(i - 1).Cells(3).Value = True Then
                 vrestriccion(2 * i - 1) = New Restriccion(2 * i - 1, nodoId, True)
@@ -152,11 +162,20 @@ Public Class Principal
             elementoId = FormElementos.dgvElementos.Rows(i - 1).Cells(0).Value
             nodoInicio = FormElementos.dgvElementos.Rows(i - 1).Cells(1).Value
             nodoFinal = FormElementos.dgvElementos.Rows(i - 1).Cells(2).Value
-            areaElem = FormElementos.dgvElementos.Rows(i - 1).Cells(3).Value
-            modElem = FormElementos.dgvElementos.Rows(i - 1).Cells(4).Value
+            If optEs.Checked Then
+                areaElem = FormElementos.dgvElementos.Rows(i - 1).Cells(4).Value 'Ingresada en kips/in2
+                modElem = FormElementos.dgvElementos.Rows(i - 1).Cells(3).Value 'Ingresada en in2
+                deltaFab = FormElementos.dgvElementos.Rows(i - 1).Cells(6).Value 'Ingresada en in
+            End If
+            If optSI.Checked Then
+                areaElem = FormElementos.dgvElementos.Rows(i - 1).Cells(4).Value * 1000000000 / 1000 'Ingresada en GPa
+                modElem = FormElementos.dgvElementos.Rows(i - 1).Cells(3).Value 'Ingresada en m2
+                deltaFab = FormElementos.dgvElementos.Rows(i - 1).Cells(6).Value / 1000 'Ingresada en mm
+            End If
+
             gamma = CType(FormElementos.txtgamma.Text, Double)
             deltaTemp = FormElementos.dgvElementos.Rows(i - 1).Cells(5).Value
-            deltaFab = FormElementos.dgvElementos.Rows(i - 1).Cells(6).Value
+
             velemento(i) = New Elemento(elementoId, vnodo(nodoInicio), vnodo(nodoFinal), areaElem, modElem, gamma, deltaTemp, deltaFab)
 
 
@@ -186,7 +205,12 @@ Public Class Principal
         Desplazamientos = estructura.GetDesplazamientosCalculados()
         'Imprimir los desplazamientos calculados en el listbox de desplazamientos
         For i = 1 To cantDesp
-            FormResultados.lstDesplazamientos.Items.Add(Desplazamientos(i))
+            If optEs.Checked Then
+                FormResultados.lstDesplazamientos.Items.Add(Desplazamientos(i) + " in")
+            End If
+            If optSI.Checked Then
+                FormResultados.lstDesplazamientos.Items.Add(Desplazamientos(i) + " m")
+            End If
         Next
         'Obtener Resultados de Reacciones de Solucion del sistema de ecuaciones
         cantReacciones = estructura.GetCantIncognitasFuerza()
@@ -194,7 +218,13 @@ Public Class Principal
         Reacciones = estructura.GetReaccionesCalculadas()
         'Imprimir las reacciones en el listbox de reacciones
         For i = 1 To cantReacciones
-            FormResultados.lstReacciones.Items.Add(Reacciones(i))
+            If optEs.Checked Then
+                FormResultados.lstReacciones.Items.Add(Reacciones(i) + " kips")
+            End If
+            If optSI.Checked Then
+                FormResultados.lstReacciones.Items.Add(Reacciones(i) + " kN")
+            End If
+
         Next
 
         'Obtener las fuerzas internas de los elementos
@@ -208,7 +238,13 @@ Public Class Principal
             Console.WriteLine(fInternas(i, 2))
             Console.WriteLine(fInternas(i, 3))
             Console.WriteLine(fInternas(i, 4))
-            FormResultados.lstFuerzas.Items.Add("F" + Str(i) + " = " + fInternas(i, 1))
+            If optEs.Checked Then
+                FormResultados.lstFuerzas.Items.Add("F" + Str(i) + " = " + fInternas(i, 1) + " kips")
+            End If
+            If optSI.Checked Then
+                FormResultados.lstFuerzas.Items.Add("F" + Str(i) + " = " + fInternas(i, 1) + " kN")
+            End If
+
 
 
         Next

@@ -361,14 +361,14 @@
     Public Sub ConstruirVectorFC()
         ReDim FC(incognitasDesp)
         For i = 1 To incognitasDesp
-            FC(i) = PF(i) - HF(i) - SPF(i)
+            FC(i) = PF(i) - HF(i) + SPF(i)
         Next
     End Sub
 
     Public Function CalcularReacciones(VectorFD() As Double, VectorFE() As Double, VectorPS() As Double, VectorSPS() As Double) As Double()
         Dim Resultado(VectorFD.GetLength(0) - 1) As Double
         For i = 1 To VectorFD.GetLength(0) - 1
-            Resultado(i) = VectorFD(i) + VectorFE(i) - VectorPS(i) + VectorSPS(i)
+            Resultado(i) = VectorFD(i) + VectorFE(i) - VectorPS(i) - VectorSPS(i)
         Next
         Return Resultado
 
