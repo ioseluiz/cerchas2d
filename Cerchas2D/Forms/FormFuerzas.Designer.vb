@@ -35,13 +35,13 @@ Partial Class FormFuerzas
         Me.dgvCargas.AllowUserToDeleteRows = False
         Me.dgvCargas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvCargas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Nodo, Me.Px, Me.Py})
-        Me.dgvCargas.Location = New System.Drawing.Point(49, 55)
-        Me.dgvCargas.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.dgvCargas.Location = New System.Drawing.Point(90, 55)
+        Me.dgvCargas.Margin = New System.Windows.Forms.Padding(2)
         Me.dgvCargas.Name = "dgvCargas"
         Me.dgvCargas.RowHeadersVisible = False
         Me.dgvCargas.RowHeadersWidth = 51
         Me.dgvCargas.RowTemplate.Height = 24
-        Me.dgvCargas.Size = New System.Drawing.Size(332, 232)
+        Me.dgvCargas.Size = New System.Drawing.Size(402, 232)
         Me.dgvCargas.TabIndex = 0
         '
         'Nodo
@@ -71,7 +71,7 @@ Partial Class FormFuerzas
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(600, 366)
         Me.Controls.Add(Me.dgvCargas)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "FormFuerzas"
         Me.Text = "uerzas"
         CType(Me.dgvCargas, System.ComponentModel.ISupportInitialize).EndInit()

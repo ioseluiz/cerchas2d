@@ -41,11 +41,11 @@ Partial Class FormElementos
         Me.dgvElementos.AllowUserToDeleteRows = False
         Me.dgvElementos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvElementos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Elemento, Me.Inicio, Me.Fin, Me.modE, Me.Area, Me.deltaT, Me.Fabricacion})
-        Me.dgvElementos.Location = New System.Drawing.Point(25, 79)
+        Me.dgvElementos.Location = New System.Drawing.Point(25, 76)
         Me.dgvElementos.Name = "dgvElementos"
         Me.dgvElementos.RowHeadersVisible = False
         Me.dgvElementos.RowHeadersWidth = 51
-        Me.dgvElementos.Size = New System.Drawing.Size(628, 289)
+        Me.dgvElementos.Size = New System.Drawing.Size(651, 289)
         Me.dgvElementos.TabIndex = 0
         '
         'Elemento
@@ -110,7 +110,7 @@ Partial Class FormElementos
         'txtgamma
         '
         Me.txtgamma.Location = New System.Drawing.Point(556, 42)
-        Me.txtgamma.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtgamma.Margin = New System.Windows.Forms.Padding(2)
         Me.txtgamma.Name = "txtgamma"
         Me.txtgamma.Size = New System.Drawing.Size(61, 20)
         Me.txtgamma.TabIndex = 2

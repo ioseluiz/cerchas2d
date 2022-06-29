@@ -16,6 +16,8 @@ Public Class Principal
     Dim vnodo() As Nodo, velemento() As Elemento, vcarga() As Carga, vrestriccion() As Restriccion
 
     Dim cantDesp As Integer, Desplazamientos() As String, cantReacciones As Integer, Reacciones() As String, fInternas(,) As String
+
+
     'Constructor
     Public Sub New()
 
@@ -115,6 +117,11 @@ Public Class Principal
         OpenChildForm(FormResultados)
     End Sub
 
+    Private Sub btnMatrices_Click(sender As Object, e As EventArgs) Handles btnMatrices.Click
+        ActivarBoton(sender, Color.FromArgb(27, 153, 139))
+        OpenChildForm(FormMatrices)
+    End Sub
+
     Private Sub PanelDesktop_Paint(sender As Object, e As PaintEventArgs) Handles PanelDesktop.Paint
 
     End Sub
@@ -198,6 +205,29 @@ Public Class Principal
 
         'Crear estructura de cercha compuesta de objetos de elementos
         Dim estructura As Cercha = New Cercha(vnodo, velemento, vcarga, vrestriccion)
+
+
+        'Imprimir matriz de Rigidez Global de la Estructura
+        Dim MatKG(,) As Double, VecF() As Object, VecP() As Double, VecD() As Object, VecSP() As Double
+        ReDim MatKG(2 * nodos, 2 * nodos), VecF(2 * nodos), VecP(2 * nodos), VecD(2 * nodos), VecSP(2 * nodos)
+        MatKG = estructura.K
+        VecF = estructura.F
+        VecP = estructura.P
+        VecD = estructura.DOriginal
+        VecSP = estructura.SP
+
+        For i = 1 To 2 * nodos
+            For j = 1 To 2 * nodos
+                FormMatrices.dgvMatrizK.Rows(i - 1).Cells(j - 1).Value = CType(MatKG(i, j), String)
+            Next
+
+            FormMatrices.dgvF.Rows(i - 1).Cells(0).Value = CType(VecF(i), String)
+            FormMatrices.dgvP.Rows(i - 1).Cells(0).Value = CType(VecP(i), String)
+            FormMatrices.dgvD.Rows(i - 1).Cells(0).Value = CType(VecD(i), String)
+            FormMatrices.dgvSP.Rows(i - 1).Cells(0).Value = CType(VecSP(i), String)
+
+
+        Next
 
         'Obtner Resultados de Desplazamientos de Solucion del sistema de ecuaciones
         cantDesp = estructura.GetCantIncognitasDesp()

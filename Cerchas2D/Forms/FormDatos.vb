@@ -1,4 +1,5 @@
 ﻿Public Class FormDatos
+    Dim i As Integer
     Private Sub NumericUpDown1_ValueChanged(sender As Object, e As EventArgs) Handles nudNodos.ValueChanged
 
     End Sub
@@ -61,6 +62,18 @@
         For i = 1 To nudNodos.Value
             FormFuerzas.dgvCargas.Rows(i - 1).Cells(0).Value = i
         Next
+
+        'Formulario de Matrices
+        FormMatrices.dgvMatrizK.ColumnCount = 2 * Int(nudNodos.Value)
+        FormMatrices.dgvMatrizK.RowCount = 2 * Int(nudNodos.Value)
+        FormMatrices.dgvF.RowCount = 2 * Int(nudNodos.Value)
+        FormMatrices.dgvF.ColumnCount = 1
+        FormMatrices.dgvP.RowCount = 2 * Int(nudNodos.Value)
+        FormMatrices.dgvP.ColumnCount = 1
+        FormMatrices.dgvD.RowCount = 2 * Int(nudNodos.Value)
+        FormMatrices.dgvD.ColumnCount = 1
+        FormMatrices.dgvSP.RowCount = 2 * Int(nudNodos.Value)
+        FormMatrices.dgvSP.ColumnCount = 1
 
 
         Button1.Enabled = False

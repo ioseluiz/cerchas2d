@@ -136,17 +136,17 @@
 
     Public Sub ConstruirVectorEfectosTemp()
         ReDim qT(4)
-        qT(1) = -gammaT * deltaTemp * ar * modE
+        qT(1) = gammaT * deltaTemp * ar * modE
         qT(2) = 0
-        qT(3) = gammaT * deltaTemp * ar * modE
+        qT(3) = -gammaT * deltaTemp * ar * modE
         qT(4) = 0
     End Sub
 
     Public Sub ConstruirVectorErrorFabLocal()
         ReDim q0(4)
-        q0(1) = -modE * ar * deltaFab / longitud
+        q0(1) = modE * ar * deltaFab / longitud
         q0(2) = 0
-        q0(3) = modE * ar * deltaFab / longitud
+        q0(3) = -modE * ar * deltaFab / longitud
         q0(4) = 0
 
 

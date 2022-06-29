@@ -103,6 +103,12 @@
     <Compile Include="Forms\FormFuerzas.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FormMatrices.Designer.vb">
+      <DependentUpon>FormMatrices.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormMatrices.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormNodos.Designer.vb">
       <DependentUpon>FormNodos.vb</DependentUpon>
     </Compile>
@@ -147,6 +153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormFuerzas.resx">
       <DependentUpon>FormFuerzas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormMatrices.resx">
+      <DependentUpon>FormMatrices.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormNodos.resx">
       <DependentUpon>FormNodos.vb</DependentUpon>

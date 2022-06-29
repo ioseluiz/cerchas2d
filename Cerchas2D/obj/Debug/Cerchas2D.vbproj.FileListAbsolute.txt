@@ -17,3 +17,4 @@ C:\Users\Jose Luis\source\repos\Cerchas2D\Cerchas2D\obj\Debug\Cerchas2D.FormNodo
 C:\Users\Jose Luis\source\repos\Cerchas2D\Cerchas2D\obj\Debug\Cerchas2D.FormElementos.resources
 C:\Users\Jose Luis\source\repos\Cerchas2D\Cerchas2D\obj\Debug\Cerchas2D.FormResultados.resources
 C:\Users\Jose Luis\source\repos\Cerchas2D\Cerchas2D\obj\Debug\Cerchas2D.FormFuerzas.resources
+C:\Users\Jose Luis\source\repos\Cerchas2D\Cerchas2D\obj\Debug\Cerchas2D.FormMatrices.resources
