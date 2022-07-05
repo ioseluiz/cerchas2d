@@ -17,6 +17,10 @@ Public Class Principal
 
     Dim cantDesp As Integer, Desplazamientos() As String, cantReacciones As Integer, Reacciones() As String, fInternas(,) As String
 
+    Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
+
+    End Sub
+
 
     'Constructor
     Public Sub New()
